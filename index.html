@@ -15,14 +15,14 @@ body {
 /* SOBRE */
 .sobre {
     position: absolute;
-    width: 200px;
-    height: 150px;
+    width: 220px;
+    height: 160px;
     background: #ffca28;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,17 +35,44 @@ body {
     50% { transform: translate(-50%, -50%) scale(1.1); }
 }
 
-/* CARTA */
-.carta {
+/* CONTENIDO */
+.contenido {
     display: none;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* CENTRADO VERTICAL */
+    align-items: center;     /* CENTRADO HORIZONTAL */
     text-align: center;
     padding: 20px;
-    color: #6d4c41;
-    animation: aparecer 2s ease-in-out;
+    box-sizing: border-box;
 }
 
+/* TEXTO */
 h1 {
     color: #ffb300;
+    font-size: 2.5em;
+}
+
+p {
+    font-size: 1.2em;
+    color: #6d4c41;
+    max-width: 400px;
+}
+
+/* GALERÍA */
+.galeria {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.galeria img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 /* FLORES */
@@ -59,27 +86,35 @@ h1 {
     0% { transform: translateY(-100px); }
     100% { transform: translateY(100vh); }
 }
-
-@keyframes aparecer {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
 </style>
 
 </head>
 <body>
 
+<!-- SOBRE -->
 <div class="sobre" onclick="abrirCarta()">
 💌 Ábreme
 </div>
 
-<div class="carta" id="carta">
+<!-- CONTENIDO -->
+<div class="contenido" id="contenido">
     <h1>🌼 Para ti 🌼</h1>
+
     <p>
         No tuve dinero para comprarte flores amarillas...<br><br>
         pero hice esto para ti 💛<br><br>
-        Porque eres alguien muy especial 🌼<br><br>
-        💛🌼TE AMO GUERITA HERMOSA🌼
+        Porque eres alguien muy especial 🌼
+    </p>
+
+    <!-- FOTOS -->
+    <div class="galeria">
+        <img src="https://picsum.photos/200?1">
+        <img src="https://picsum.photos/200?2">
+        <img src="https://picsum.photos/200?3">
+    </div>
+
+    <p style="margin-top:20px; font-size:0.9em;">
+        💛 Toca la pantalla para escuchar la canción
     </p>
 </div>
 
@@ -98,12 +133,16 @@ frameborder="0" allow="autoplay"></iframe>
 <script>
 function abrirCarta() {
     document.querySelector(".sobre").style.display = "none";
-    document.getElementById("carta").style.display = "block";
-
-    // iniciar música
-    document.getElementById("player").src =
-    "https://www.youtube.com/watch?v=yl3GDni9WCQ&list=RDyl3GDni9WCQ&start_radio=1";
+    document.getElementById("contenido").style.display = "flex";
 }
+
+// música al tocar pantalla
+document.body.addEventListener("click", function () {
+    let player = document.getElementById("player");
+    if (!player.src) {
+        player.src = "https://www.youtube.com/embed/p_1Osm5xE5Y?autoplay=1&loop=1&playlist=p_1Osm5xE5Y";
+    }
+});
 </script>
 
 </body>
