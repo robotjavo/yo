@@ -134,15 +134,16 @@ frameborder="0" allow="autoplay"></iframe>
 function abrirCarta() {
     document.querySelector(".sobre").style.display = "none";
     document.getElementById("contenido").style.display = "flex";
+
+    iniciarMusica();
 }
 
-// música al tocar pantalla
-document.body.addEventListener("click", function () {
+function iniciarMusica() {
     let player = document.getElementById("player");
     if (!player.src) {
-        player.src = "https://www.youtube.com/watch?v=yl3GDni9WCQ&list=RDyl3GDni9WCQ&start_radio=1";
+        player.src = "https://www.youtube.com/embed/p_1Osm5xE5Y?autoplay=1&loop=1&playlist=p_1Osm5xE5Y";
     }
-});
+}
 </script>
 
 </body>
