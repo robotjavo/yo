@@ -14,26 +14,23 @@ body {
 
 /* SOBRE */
 .sobre {
-    position: fixed; /* cubre toda la pantalla */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-
     background: linear-gradient(to top, #ffca28, #ffc107);
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 2em;
     font-weight: bold;
     cursor: pointer;
-
-    z-index: 9999; /* siempre encima */
+    z-index: 9999;
 }
 
-    .oculto {
+/* ANIMACIÓN DESAPARECER */
+.oculto {
     animation: desaparecer 1s forwards;
 }
 
@@ -42,23 +39,27 @@ body {
     to { opacity: 0; }
 }
 
-@keyframes latido {
-    0%,100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.1); }
-}
-
 /* CONTENIDO */
 .contenido {
     display: none;
     height: 100vh;
     width: 100%;
-    display: flex;
     flex-direction: column;
-    justify-content: center; /* CENTRADO VERTICAL */
-    align-items: center;     /* CENTRADO HORIZONTAL */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+}
+
+/* SLIDES */
+.slide {
+    display: none;
+    animation: fade 1.5s;
+}
+
+.slide.activo {
+    display: block;
 }
 
 /* TEXTO */
@@ -73,18 +74,12 @@ p {
     max-width: 400px;
 }
 
-/* GALERÍA */
-.galeria {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-}
-
-.galeria img {
-    width: 100px;
-    height: 100px;
+/* IMÁGENES */
+.imagen {
+    width: 250px;
+    height: 250px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 /* FLORES */
@@ -98,6 +93,12 @@ p {
     0% { transform: translateY(-100px); }
     100% { transform: translateY(100vh); }
 }
+
+/* FADE */
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 </style>
 
 </head>
@@ -110,26 +111,35 @@ p {
 
 <!-- CONTENIDO -->
 <div class="contenido" id="contenido">
-    <h1>🌼 Para ti 🌼</h1>
 
-    <p>
-        No tuve dinero para comprarte flores amarillas...<br><br>
-        pero hice esto para ti 💛<br><br>
-        Porque eres alguien muy especial 🌼
-    </p>
-
-    <!-- FOTOS -->
-    <div class="galeria">
-        <img src="FOTO1.jpeg">
-        <img src="FOTO2.jpeg">
-        <img src="FOTO3.jpeg">
+    <!-- TEXTO -->
+    <div class="slide activo">
+        <h1>🌼 Para ti 🌼</h1>
+        <p>
+            No tuve dinero para comprarte flores amarillas...<br><br>
+            pero hice esto para ti 💛<br><br>
+            Porque eres alguien muy especial 🌼
+        </p>
     </div>
-    <audio id="musica" src="CANCION1.mp3" preload="auto"></audio>
-    
 
-    <p style="margin-top:20px; font-size:0.9em;">
-        💛 
-    </p>
+    <!-- IMAGEN 1 -->
+    <div class="slide">
+        <img src="FOTO1.jpeg" class="imagen">
+    </div>
+
+    <!-- IMAGEN 2 -->
+    <div class="slide">
+        <img src="FOTO2.jpeg" class="imagen">
+    </div>
+
+    <!-- IMAGEN 3 -->
+    <div class="slide">
+        <img src="FOTO3.jpeg" class="imagen">
+    </div>
+
+    <!-- AUDIO -->
+    <audio id="musica" src="CANCION1.mp3" preload="auto" loop></audio>
+
 </div>
 
 <!-- FLORES -->
@@ -139,12 +149,21 @@ p {
 <div class="flower" style="left:70%; animation-delay:1s;">🌼</div>
 <div class="flower" style="left:90%; animation-delay:3s;">🌼</div>
 
-<!-- MÚSICA -->
-<iframe id="player" width="0" height="0"
-src=""
-frameborder="0" allow="autoplay"></iframe>
-
 <script>
+let index = 0;
+
+function iniciarCarrusel() {
+    let slides = document.querySelectorAll(".slide");
+
+    setInterval(() => {
+        slides[index].classList.remove("activo");
+
+        index = (index + 1) % slides.length;
+
+        slides[index].classList.add("activo");
+    }, 3000);
+}
+
 function abrirCarta() {
     let sobre = document.querySelector(".sobre");
 
@@ -156,14 +175,13 @@ function abrirCarta() {
     }, 1000);
 
     // música
-     // reproducir música
     let musica = document.getElementById("musica");
-    musica.volume = 0.7; // opcional
-    musica.play().catch(() => {
-        console.log("El navegador bloqueó el audio");
-    });
-}
+    musica.volume = 0.7;
+    musica.play().catch(() => {});
 
+    // carrusel
+    iniciarCarrusel();
+}
 </script>
 
 </body>
