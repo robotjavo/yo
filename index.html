@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti 💛</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(to top, #fff9c4, #ffe082);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* SOBRE */
+.sobre {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background: #ffca28;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    animation: latido 1.5s infinite;
+}
+
+@keyframes latido {
+    0%,100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* CARTA */
+.carta {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: #6d4c41;
+    animation: aparecer 2s ease-in-out;
+}
+
+h1 {
+    color: #ffb300;
+}
+
+/* FLORES */
+.flower {
+    position: absolute;
+    font-size: 2em;
+    animation: caer 10s linear infinite;
+}
+
+@keyframes caer {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes aparecer {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="sobre" onclick="abrirCarta()">
+💌 Ábreme
+</div>
+
+<div class="carta" id="carta">
+    <h1>🌼 Para ti 🌼</h1>
+    <p>
+        No tuve dinero para comprarte flores amarillas...<br><br>
+        pero hice esto para ti 💛<br><br>
+        Porque eres alguien muy especial 🌼
+    </p>
+</div>
+
+<!-- FLORES -->
+<div class="flower" style="left:10%;">🌼</div>
+<div class="flower" style="left:30%; animation-delay:2s;">🌼</div>
+<div class="flower" style="left:50%; animation-delay:4s;">🌼</div>
+<div class="flower" style="left:70%; animation-delay:1s;">🌼</div>
+<div class="flower" style="left:90%; animation-delay:3s;">🌼</div>
+
+<!-- MÚSICA -->
+<iframe id="player" width="0" height="0"
+src=""
+frameborder="0" allow="autoplay"></iframe>
+
+<script>
+function abrirCarta() {
+    document.querySelector(".sobre").style.display = "none";
+    document.getElementById("carta").style.display = "block";
+
+    // iniciar música
+    document.getElementById("player").src =
+    "https://www.youtube.com/embed/p_1Osm5xE5Y?autoplay=1&loop=1&playlist=p_1Osm5xE5Y";
+}
+</script>
+
+</body>
+</html>
