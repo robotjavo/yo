@@ -125,6 +125,8 @@ p {
         <img src="FOTO3.jpeg">
     </div>
 
+    <audio id="musica" src="cancion.mp3"></audio>
+
     <p style="margin-top:20px; font-size:0.9em;">
         💛 Toca la pantalla para escuchar la canción
     </p>
@@ -154,8 +156,9 @@ function abrirCarta() {
     }, 1000);
 
     // música
-    document.getElementById("player").src =
-    "https://www.youtube.com/embed/p_1Osm5xE5Y?autoplay=1&loop=1&playlist=p_1Osm5xE5Y";
+     // reproducir música
+    let musica = document.getElementById("musica");
+    musica.play();
 }
 
 </script>
