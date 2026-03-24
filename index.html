@@ -124,8 +124,8 @@ p {
         <img src="FOTO2.jpeg">
         <img src="FOTO3.jpeg">
     </div>
-
-    <audio id="musica" src="CANCION1.mp3"></audio>
+    <audio id="musica" src="CANCION1.mp3" preload="auto"></audio>
+    
 
     <p style="margin-top:20px; font-size:0.9em;">
         💛 Toca la pantalla para escuchar la canción
@@ -158,7 +158,10 @@ function abrirCarta() {
     // música
      // reproducir música
     let musica = document.getElementById("musica");
-    musica.play();
+    musica.volume = 0.7; // opcional
+    musica.play().catch(() => {
+        console.log("El navegador bloqueó el audio");
+    });
 }
 
 </script>
