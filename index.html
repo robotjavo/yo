@@ -33,6 +33,15 @@ body {
     z-index: 9999; /* siempre encima */
 }
 
+    .oculto {
+    animation: desaparecer 1s forwards;
+}
+
+@keyframes desaparecer {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
 @keyframes latido {
     0%,100% { transform: translate(-50%, -50%) scale(1); }
     50% { transform: translate(-50%, -50%) scale(1.1); }
@@ -135,18 +144,20 @@ frameborder="0" allow="autoplay"></iframe>
 
 <script>
 function abrirCarta() {
-    document.querySelector(".sobre").style.display = "none";
-    document.getElementById("contenido").style.display = "flex";
+    let sobre = document.querySelector(".sobre");
 
-    iniciarMusica();
+    sobre.classList.add("oculto");
+
+    setTimeout(() => {
+        sobre.style.display = "none";
+        document.getElementById("contenido").style.display = "flex";
+    }, 1000);
+
+    // música
+    document.getElementById("player").src =
+    "https://www.youtube.com/embed/p_1Osm5xE5Y?autoplay=1&loop=1&playlist=p_1Osm5xE5Y";
 }
 
-function iniciarMusica() {
-    let player = document.getElementById("player");
-    if (!player.src) {
-        player.src = "https://www.youtube.com/embed/p_1Osm5xE5Y?autoplay=1&loop=1&playlist=p_1Osm5xE5Y";
-    }
-}
 </script>
 
 </body>
